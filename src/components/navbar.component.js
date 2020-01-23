@@ -20,7 +20,7 @@ export default function Navbar(){
                     <li className="nav-item"><a className="nav-link" href="about.html">About</a></li> 
                     <li className="nav-item"><a className="nav-link" href="speaker.html">Speakers</a>
                     </li><li className="nav-item submenu dropdown">
-                      <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
+                      <a href="/" className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
                       <ul className="dropdown-menu">
                         <li className="nav-item"><a className="nav-link" href="event-schedule.html">Schedule</a>                  
                         </li><li className="nav-item"><a className="nav-link" href="event-gallery.html">Gallery</a>                  
@@ -28,7 +28,7 @@ export default function Navbar(){
                         </li></ul>
                     </li>
                     <li className="nav-item submenu dropdown">
-                      <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+                      <a href="/" className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
                       <ul className="dropdown-menu">
                         <li className="nav-item"><a className="nav-link" href="blog.html">Blog Single</a></li>
                         <li className="nav-item"><a className="nav-link" href="blog-details.html">Blog Details</a></li>
@@ -37,7 +37,7 @@ export default function Navbar(){
                     <li className="nav-item"><a className="nav-link" href="contact.html">Contact</a></li>
                   </ul>
                   <ul className="nav-right text-center text-lg-right py-4 py-lg-0">
-                    <li><a href="/game">Sign In</a></li>
+                    <li><a href="/login">Sign In</a></li>
                   </ul>
                 </div> 
               </div>

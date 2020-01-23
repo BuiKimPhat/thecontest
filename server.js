@@ -6,7 +6,7 @@ require('dotenv').config();
 const app = express();
 
 // .env
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 const uri = process.env.ATLAS_URL;
 
 // middlewares
@@ -53,7 +53,7 @@ app.post('/submit', (req,res) => {
     })
     .catch(err => res.status(400).json('Error: ' + err));
 })
-app.post('/admin', (req,res) => {
+app.post('/users', (req,res) => {
     User.findById(req.body.id)
     .then(admin => {
         if (admin.isAdmin) {

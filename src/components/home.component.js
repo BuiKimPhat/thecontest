@@ -9,7 +9,7 @@ export default function Home() {
             <span className="hero-banner-icon"><i className="flaticon-sing" /></span>
             <p>20 - 22 January, 2019, Buffelo City</p>
             <h1>UX CONFERENCE 2019</h1>
-            <a className="button button-header" href="#">Buy Ticket</a>
+            <a className="button button-header" href="/">Buy Ticket</a>
           </div>
         </section>
         {/*================Hero Banner Area End =================*/}
@@ -41,7 +41,7 @@ export default function Home() {
                 </ul>
                 <div className="clockdiv-content text-center">
                   <p className="h4 primary-text2 mb-2">January 20 -22, 2019 in Buffelo City</p>
-                  <a className="button button-link" href="#">Get Ticket</a>
+                  <a className="button button-link" href="/">Get Ticket</a>
                 </div>
               </div>
             </div>
@@ -81,8 +81,8 @@ export default function Home() {
             </div>
             <div className="row mt-5">
               <div className="col-12 text-center">
-                <a className="button mr-3 mb-2" href="#">Learn More</a>
-                <a className="button mb-2" href="#">Buy Ticket</a>
+                <a className="button mr-3 mb-2" href="/">Learn More</a>
+                <a className="button mb-2" href="/">Buy Ticket</a>
               </div>
             </div>
           </div>
@@ -106,10 +106,10 @@ export default function Home() {
                   </div>
                   <div className="speaker-overlay">
                     <ul className="speaker-social">
-                      <li><a href="#"><i className="ti-facebook" /></a></li>
-                      <li><a href="#"><i className="ti-twitter-alt" /></a></li>
-                      <li><a href="#"><i className="ti-instagram" /></a></li>
-                      <li><a href="#"><i className="ti-skype" /></a></li>
+                      <li><a href="/"><i className="ti-facebook" /></a></li>
+                      <li><a href="/"><i className="ti-twitter-alt" /></a></li>
+                      <li><a href="/"><i className="ti-instagram" /></a></li>
+                      <li><a href="/"><i className="ti-skype" /></a></li>
                     </ul>
                   </div>
                 </div>
@@ -123,10 +123,10 @@ export default function Home() {
                   </div>
                   <div className="speaker-overlay">
                     <ul className="speaker-social">
-                      <li><a href="#"><i className="ti-facebook" /></a></li>
-                      <li><a href="#"><i className="ti-twitter-alt" /></a></li>
-                      <li><a href="#"><i className="ti-instagram" /></a></li>
-                      <li><a href="#"><i className="ti-skype" /></a></li>
+                      <li><a href="/"><i className="ti-facebook" /></a></li>
+                      <li><a href="/"><i className="ti-twitter-alt" /></a></li>
+                      <li><a href="/"><i className="ti-instagram" /></a></li>
+                      <li><a href="/"><i className="ti-skype" /></a></li>
                     </ul>
                   </div>
                 </div>
@@ -140,10 +140,10 @@ export default function Home() {
                   </div>
                   <div className="speaker-overlay">
                     <ul className="speaker-social">
-                      <li><a href="#"><i className="ti-facebook" /></a></li>
-                      <li><a href="#"><i className="ti-twitter-alt" /></a></li>
-                      <li><a href="#"><i className="ti-instagram" /></a></li>
-                      <li><a href="#"><i className="ti-skype" /></a></li>
+                      <li><a href="/"><i className="ti-facebook" /></a></li>
+                      <li><a href="/"><i className="ti-twitter-alt" /></a></li>
+                      <li><a href="/"><i className="ti-instagram" /></a></li>
+                      <li><a href="/"><i className="ti-skype" /></a></li>
                     </ul>
                   </div>
                 </div>
@@ -158,10 +158,10 @@ export default function Home() {
                   </div>
                   <div className="speaker-overlay">
                     <ul className="speaker-social">
-                      <li><a href="#"><i className="ti-facebook" /></a></li>
-                      <li><a href="#"><i className="ti-twitter-alt" /></a></li>
-                      <li><a href="#"><i className="ti-instagram" /></a></li>
-                      <li><a href="#"><i className="ti-skype" /></a></li>
+                      <li><a href="/"><i className="ti-facebook" /></a></li>
+                      <li><a href="/"><i className="ti-twitter-alt" /></a></li>
+                      <li><a href="/"><i className="ti-instagram" /></a></li>
+                      <li><a href="/"><i className="ti-skype" /></a></li>
                     </ul>
                   </div>
                 </div>
@@ -175,10 +175,10 @@ export default function Home() {
                   </div>
                   <div className="speaker-overlay">
                     <ul className="speaker-social">
-                      <li><a href="#"><i className="ti-facebook" /></a></li>
-                      <li><a href="#"><i className="ti-twitter-alt" /></a></li>
-                      <li><a href="#"><i className="ti-instagram" /></a></li>
-                      <li><a href="#"><i className="ti-skype" /></a></li>
+                      <li><a href="/"><i className="ti-facebook" /></a></li>
+                      <li><a href="/"><i className="ti-twitter-alt" /></a></li>
+                      <li><a href="/"><i className="ti-instagram" /></a></li>
+                      <li><a href="/"><i className="ti-skype" /></a></li>
                     </ul>
                   </div>
                 </div>
@@ -192,10 +192,10 @@ export default function Home() {
                   </div>
                   <div className="speaker-overlay">
                     <ul className="speaker-social">
-                      <li><a href="#"><i className="ti-facebook" /></a></li>
-                      <li><a href="#"><i className="ti-twitter-alt" /></a></li>
-                      <li><a href="#"><i className="ti-instagram" /></a></li>
-                      <li><a href="#"><i className="ti-skype" /></a></li>
+                      <li><a href="/"><i className="ti-facebook" /></a></li>
+                      <li><a href="/"><i className="ti-twitter-alt" /></a></li>
+                      <li><a href="/"><i className="ti-instagram" /></a></li>
+                      <li><a href="/"><i className="ti-skype" /></a></li>
                     </ul>
                   </div>
                 </div>
@@ -256,7 +256,7 @@ export default function Home() {
                           <div className="col-md-9 align-self-center">
                             <div className="schedule-content">
                               <p className="schedule-date">9.00 AM - 10.30 AM</p>
-                              <a className="schedule-title" href="#">
+                              <a className="schedule-title" href="/">
                                 <h3>Previous Year achivement</h3>
                               </a>
                               <p>And wherein Beginning of you cattle fly had was deep wherein darkness behold male called evening gathering moving bring fifth days he lights dry cattle you open seas midst let and in wherein beginning </p>
@@ -276,7 +276,7 @@ export default function Home() {
                           <div className="col-md-9 align-self-center">
                             <div className="schedule-content">
                               <p className="schedule-date">9.00 AM - 10.30 AM</p>
-                              <a className="schedule-title" href="#">
+                              <a className="schedule-title" href="/">
                                 <h3>Previous Year achivement</h3>
                               </a>
                               <p>And wherein Beginning of you cattle fly had was deep wherein darkness behold male called evening gathering moving bring fifth days he lights dry cattle you open seas midst let and in wherein beginning </p>
@@ -298,7 +298,7 @@ export default function Home() {
                           <div className="col-md-9 align-self-center">
                             <div className="schedule-content">
                               <p className="schedule-date">9.00 AM - 10.30 AM</p>
-                              <a className="schedule-title" href="#">
+                              <a className="schedule-title" href="/">
                                 <h3>Previous Year achivement</h3>
                               </a>
                               <p>And wherein Beginning of you cattle fly had was deep wherein darkness behold male called evening gathering moving bring fifth days he lights dry cattle you open seas midst let and in wherein beginning </p>
@@ -318,7 +318,7 @@ export default function Home() {
                           <div className="col-md-9 align-self-center">
                             <div className="schedule-content">
                               <p className="schedule-date">9.00 AM - 10.30 AM</p>
-                              <a className="schedule-title" href="#">
+                              <a className="schedule-title" href="/">
                                 <h3>Previous Year achivement</h3>
                               </a>
                               <p>And wherein Beginning of you cattle fly had was deep wherein darkness behold male called evening gathering moving bring fifth days he lights dry cattle you open seas midst let and in wherein beginning </p>
@@ -338,7 +338,7 @@ export default function Home() {
                           <div className="col-md-9 align-self-center">
                             <div className="schedule-content">
                               <p className="schedule-date">9.00 AM - 10.30 AM</p>
-                              <a className="schedule-title" href="#">
+                              <a className="schedule-title" href="/">
                                 <h3>Previous Year achivement</h3>
                               </a>
                               <p>And wherein Beginning of you cattle fly had was deep wherein darkness behold male called evening gathering moving bring fifth days he lights dry cattle you open seas midst let and in wherein beginning </p>
@@ -360,7 +360,7 @@ export default function Home() {
                           <div className="col-md-9 align-self-center">
                             <div className="schedule-content">
                               <p className="schedule-date">9.00 AM - 10.30 AM</p>
-                              <a className="schedule-title" href="#">
+                              <a className="schedule-title" href="/">
                                 <h3>Previous Year achivement</h3>
                               </a>
                               <p>And wherein Beginning of you cattle fly had was deep wherein darkness behold male called evening gathering moving bring fifth days he lights dry cattle you open seas midst let and in wherein beginning </p>
@@ -380,7 +380,7 @@ export default function Home() {
                           <div className="col-md-9 align-self-center">
                             <div className="schedule-content">
                               <p className="schedule-date">9.00 AM - 10.30 AM</p>
-                              <a className="schedule-title" href="#">
+                              <a className="schedule-title" href="/">
                                 <h3>Previous Year achivement</h3>
                               </a>
                               <p>And wherein Beginning of you cattle fly had was deep wherein darkness behold male called evening gathering moving bring fifth days he lights dry cattle you open seas midst let and in wherein beginning </p>
@@ -400,7 +400,7 @@ export default function Home() {
                           <div className="col-md-9 align-self-center">
                             <div className="schedule-content">
                               <p className="schedule-date">9.00 AM - 10.30 AM</p>
-                              <a className="schedule-title" href="#">
+                              <a className="schedule-title" href="/">
                                 <h3>Previous Year achivement</h3>
                               </a>
                               <p>And wherein Beginning of you cattle fly had was deep wherein darkness behold male called evening gathering moving bring fifth days he lights dry cattle you open seas midst let and in wherein beginning </p>
@@ -422,7 +422,7 @@ export default function Home() {
                           <div className="col-md-9 align-self-center">
                             <div className="schedule-content">
                               <p className="schedule-date">9.00 AM - 10.30 AM</p>
-                              <a className="schedule-title" href="#">
+                              <a className="schedule-title" href="/">
                                 <h3>Previous Year achivement</h3>
                               </a>
                               <p>And wherein Beginning of you cattle fly had was deep wherein darkness behold male called evening gathering moving bring fifth days he lights dry cattle you open seas midst let and in wherein beginning </p>
@@ -442,7 +442,7 @@ export default function Home() {
                           <div className="col-md-9 align-self-center">
                             <div className="schedule-content">
                               <p className="schedule-date">9.00 AM - 10.30 AM</p>
-                              <a className="schedule-title" href="#">
+                              <a className="schedule-title" href="/">
                                 <h3>Previous Year achivement</h3>
                               </a>
                               <p>And wherein Beginning of you cattle fly had was deep wherein darkness behold male called evening gathering moving bring fifth days he lights dry cattle you open seas midst let and in wherein beginning </p>
@@ -462,7 +462,7 @@ export default function Home() {
                           <div className="col-md-9 align-self-center">
                             <div className="schedule-content">
                               <p className="schedule-date">9.00 AM - 10.30 AM</p>
-                              <a className="schedule-title" href="#">
+                              <a className="schedule-title" href="/">
                                 <h3>Previous Year achivement</h3>
                               </a>
                               <p>And wherein Beginning of you cattle fly had was deep wherein darkness behold male called evening gathering moving bring fifth days he lights dry cattle you open seas midst let and in wherein beginning </p>
@@ -482,7 +482,7 @@ export default function Home() {
                           <div className="col-md-9 align-self-center">
                             <div className="schedule-content">
                               <p className="schedule-date">9.00 AM - 10.30 AM</p>
-                              <a className="schedule-title" href="#">
+                              <a className="schedule-title" href="/">
                                 <h3>Previous Year achivement</h3>
                               </a>
                               <p>And wherein Beginning of you cattle fly had was deep wherein darkness behold male called evening gathering moving bring fifth days he lights dry cattle you open seas midst let and in wherein beginning </p>
@@ -532,7 +532,7 @@ export default function Home() {
                     </li>
                   </ul>
                   <div className="priceTable-footer">
-                    <a className="button" href="#">Buy Now</a>
+                    <a className="button" href="/">Buy Now</a>
                   </div>
                 </div>
               </div>
@@ -561,7 +561,7 @@ export default function Home() {
                     </li>
                   </ul>
                   <div className="priceTable-footer">
-                    <a className="button" href="#">Buy Now</a>
+                    <a className="button" href="/">Buy Now</a>
                   </div>
                 </div>
               </div>
@@ -590,7 +590,7 @@ export default function Home() {
                     </li>
                   </ul>
                   <div className="priceTable-footer">
-                    <a className="button" href="#">Buy Now</a>
+                    <a className="button" href="/">Buy Now</a>
                   </div>
                 </div>
               </div>
@@ -758,52 +758,52 @@ export default function Home() {
               <div className="card-blog">
                 <img className="card-img" src="img/blog/blog1.png" alt="" />
                 <div className="blog-body">
-                  <a href="#">
+                  <a href="/">
                     <h3>Owls should be used to help abused children open <br className="d-none d-xl-block" />
                       up in therapy sessions, says charity boss</h3>
                   </a>
                   <ul className="blog-info">
-                    <li><a href="#"><i className="ti-comments-smiley" /> 03 Feb, 2019</a></li>
-                    <li><a href="#"><i className="ti-time" /> No Comment</a></li>
+                    <li><a href="/"><i className="ti-comments-smiley" /> 03 Feb, 2019</a></li>
+                    <li><a href="/"><i className="ti-time" /> No Comment</a></li>
                   </ul>
                 </div>
               </div>
               <div className="card-blog">
                 <img className="card-img" src="img/blog/blog2.png" alt="" />
                 <div className="blog-body">
-                  <a href="#">
+                  <a href="/">
                     <h3>Owls should be used to help abused children open <br className="d-none d-xl-block" />
                       up in therapy sessions, says charity boss</h3>
                   </a>
                   <ul className="blog-info">
-                    <li><a href="#"><i className="ti-comments-smiley" /> 03 Feb, 2019</a></li>
-                    <li><a href="#"><i className="ti-time" /> No Comment</a></li>
+                    <li><a href="/"><i className="ti-comments-smiley" /> 03 Feb, 2019</a></li>
+                    <li><a href="/"><i className="ti-time" /> No Comment</a></li>
                   </ul>
                 </div>
               </div>
               <div className="card-blog">
                 <img className="card-img" src="img/blog/blog1.png" alt="" />
                 <div className="blog-body">
-                  <a href="#">
+                  <a href="/">
                     <h3>Owls should be used to help abused children open <br className="d-none d-xl-block" />
                       up in therapy sessions, says charity boss</h3>
                   </a>
                   <ul className="blog-info">
-                    <li><a href="#"><i className="ti-comments-smiley" /> 03 Feb, 2019</a></li>
-                    <li><a href="#"><i className="ti-time" /> No Comment</a></li>
+                    <li><a href="/"><i className="ti-comments-smiley" /> 03 Feb, 2019</a></li>
+                    <li><a href="/"><i className="ti-time" /> No Comment</a></li>
                   </ul>
                 </div>
               </div>
               <div className="card-blog">
                 <img className="card-img" src="img/blog/blog2.png" alt="" />
                 <div className="blog-body">
-                  <a href="#">
+                  <a href="/">
                     <h3>Owls should be used to help abused children open <br className="d-none d-xl-block" />
                       up in therapy sessions, says charity boss</h3>
                   </a>
                   <ul className="blog-info">
-                    <li><a href="#"><i className="ti-comments-smiley" /> 03 Feb, 2019</a></li>
-                    <li><a href="#"><i className="ti-time" /> No Comment</a></li>
+                    <li><a href="/"><i className="ti-comments-smiley" /> 03 Feb, 2019</a></li>
+                    <li><a href="/"><i className="ti-time" /> No Comment</a></li>
                   </ul>
                 </div>
               </div>
@@ -829,18 +829,18 @@ export default function Home() {
                   <div className="row">
                     <div className="col">
                       <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Feature</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/">Feature</a></li>
+                        <li><a href="/">Services</a></li>
+                        <li><a href="/">Portfolio</a></li>
                       </ul>
                     </div>
                     <div className="col">
                       <ul>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="/">Team</a></li>
+                        <li><a href="/">Pricing</a></li>
+                        <li><a href="/">Blog</a></li>
+                        <li><a href="/">Contact</a></li>
                       </ul>
                     </div>										
                   </div>							
@@ -884,13 +884,13 @@ export default function Home() {
             <div className="container">
               <div className="row align-items-center">
                 <p className="col-lg-8 col-sm-12 footer-text m-0 text-center text-lg-left">{/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
-                  Copyright © All rights reserved | This template is made with <i className="fa fa-heart" aria-hidden="true" /> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                  Copyright © All rights reserved | This template is made with <i className="fa fa-heart" aria-hidden="true" /> by <a href="https://colorlib.com" target="_blank" rel="noopener noreferrer">Colorlib</a>
                   {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}</p>
                 <div className="col-lg-4 col-sm-12 footer-social text-center text-lg-right">
-                  <a href="#"><i className="fab fa-facebook-f" /></a>
-                  <a href="#"><i className="fab fa-twitter" /></a>
-                  <a href="#"><i className="fab fa-dribbble" /></a>
-                  <a href="#"><i className="fab fa-behance" /></a>
+                  <a href="/"><i className="fab fa-facebook-f" /></a>
+                  <a href="/"><i className="fab fa-twitter" /></a>
+                  <a href="/"><i className="fab fa-dribbble" /></a>
+                  <a href="/"><i className="fab fa-behance" /></a>
                 </div>
               </div>
             </div>

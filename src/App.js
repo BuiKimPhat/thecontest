@@ -1,11 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
 import Home from './components/home.component'
 import Navbar from './components/navbar.component'
 import Game from './components/game.component'
 import Admin from './components/admin.component'
+import Login from './components/login.component'
+import editUser from './components/editUser.component';
+import editQuiz from './components/editQuestion.component';
 
 function App() {
   return (
@@ -14,6 +16,9 @@ function App() {
         <Route path="/" exact component={Home} />
         <Route path="/game" component={Game} />
         <Route path="/admin" component={Admin} />
+        <Route path="/login" component={Login} />
+        <Route path="/admin/users" component={editUser} />
+        <Route path="/admin/questions" component={editQuiz} />
       </Router>
     );
 }

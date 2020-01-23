@@ -7,7 +7,7 @@ const questionSchema = new Schema({
     b: {type: String},
     c: {type: String},
     d: {type: String},
-    ans: {type: String}
+    ans: {type: String, trim: true}
 }, {
     timestamps: true
 });

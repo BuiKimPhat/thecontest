@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 
 export default class Admin extends React.Component {
     constructor(props){
@@ -7,35 +6,20 @@ export default class Admin extends React.Component {
         this.state = {
             id: this.props.location.id,
             username: this.props.location.username,
-            userList: []
         }
+        this.handleClick = this.handleClick.bind(this)
     }
-    componentDidMount(){
-        axios.post('http://localhost:5000/admin', {id: this.state.id})
-        .then(res => {
-            this.setState({
-                userList: res.data
-            })
-        })
-        .catch(err => console.log(err));
+    handleClick(e){
+        var value = e.target.value;
+        if (value === "Users") this.props.history.push({pathname: '/admin/users', id: this.state.id});
+        else this.props.history.push({pathname: '/admin/questions', id: this.state.id});
     }
     render(){
         return(
-            <div>
-                Welcome {this.state.username}!
-                <table class="table table-hover">
-                <thead>
-                    <tr>
-                    <th>ID</th>
-                    <th>User</th>
-                    <th>Password</th>
-                    <th>Who</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.state.userList.map(user => (<tr><td>{user._id}</td><td>{user.username}</td><td>{user.password}</td><td>{user.isAdmin ? "Admin" : "Candidate"}</td></tr>))}
-                </tbody>
-                </table>
+            <div className="container">
+                Welcome {this.state.username}! <br />
+                <button className="btn btn-warning" value="Users" onClick={this.handleClick}>Users</button>
+                <button className="btn btn-warning" value="Quiz" onClick={this.handleClick}>Questions</button>
             </div>
         )
     }
