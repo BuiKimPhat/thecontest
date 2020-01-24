@@ -19,7 +19,7 @@ export default class Game extends React.Component {
             alert("Bạn cần phải đăng nhập để tiếp tục!");
             this.props.history.push('/login');
         }
-        axios.get('http://10.148.0.10/questions')
+        axios.get('http://localhost:6969/questions')
         .then(res => {
             this.setState({
                 questions: res.data
@@ -50,7 +50,7 @@ export default class Game extends React.Component {
             id: this.state.id,
             play: this.state.play
         }
-        axios.post('http://10.148.0.10/submit', user)
+        axios.post('http://localhost:6969/submit', user)
             .then(res => {
                 alert(res.data);
                 this.props.history.push('/login')

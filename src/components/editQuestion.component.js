@@ -10,7 +10,7 @@ export default class editQuiz extends React.Component {
         }
     }
     componentDidMount(){
-        axios.get('http://10.148.0.10/questions')
+        axios.get('http://localhost:6969/questions')
             .then(res => {
                 this.setState({
                     quizList: res.data

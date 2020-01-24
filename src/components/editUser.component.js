@@ -10,7 +10,7 @@ export default class editUser extends React.Component {
         }
     }
     componentDidMount(){
-        axios.post('http://10.148.0.10/users', {id: this.state.id})
+        axios.post('http://localhost:6969/users', {id: this.state.id})
         .then(res => {
             this.setState({
                 userList: res.data
