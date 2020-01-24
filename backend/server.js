@@ -1,20 +1,20 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-require('dotenv').config();
+require('dotenv').config({ path: './.env' });
 
 const app = express();
 
 // .env
 const PORT = 6969;
-const uri = process.env.ATLAS_URL;
+const uri = process.env.ATLAS_URL.toString();
 
 // middlewares
 app.use(cors());
 app.use(express.json());
 
 //setup database
-mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 var connection = mongoose.connection;
 connection.once('open', () => {
     console.log("Connected to MongoDB database!");
