@@ -1,13 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-require('dotenv').config({ path: './.env' });
+require('dotenv').config();
 
 const app = express();
 
 // .env
 const PORT = 6969;
-const uri = process.env.ATLAS_URL.toString();
+const uri = process.env.ATLAS_URL;
 
 // middlewares
 app.use(cors());
