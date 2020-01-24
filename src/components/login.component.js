@@ -31,7 +31,7 @@ export default class Login extends React.Component {
             password: this.state.password
         }
 
-        axios.post('http://localhost:6969/login', user)
+        axios.post('http://10.148.0.11:6969/login', user)
             .then(res => {
                 if (res.data === "User not found!") alert("Wrong username or password!");
                 else {
