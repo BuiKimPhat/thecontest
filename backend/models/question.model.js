@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const questionSchema = new Schema({
-    ask: { type: String, require: true, unique: true },
+    ask: { type: String, require: true },
     a: {type: String},
     b: {type: String},
     c: {type: String},

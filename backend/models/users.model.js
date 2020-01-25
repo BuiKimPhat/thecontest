@@ -6,12 +6,11 @@ const userSchema = new Schema({
     username: { type: String, required: true, unique: true, trim: true },
     password: { type: String, required: true },
     isAdmin: { type: Boolean },
-    hasAnswered: { type: Boolean },
+    time: {type: Number},
     play: [
         {
             askID: {type: String},
             ans: {type: String},
-            time: {type: Number}
         }
     ]
 }, {

@@ -19,7 +19,7 @@ export default class Game extends React.Component {
             alert("Bạn cần phải đăng nhập để tiếp tục!");
             this.props.history.push('/login');
         }
-        axios.get('http://34.87.115.5/questions')
+        axios.get('http://localhost:6969/questions')
         .then(res => {
             this.setState({
                 questions: res.data
@@ -50,7 +50,7 @@ export default class Game extends React.Component {
             id: this.state.id,
             play: this.state.play
         }
-        axios.post('http://34.87.115.5/submit', user)
+        axios.post('http://localhost:6969/submit', user)
             .then(res => {
                 alert(res.data);
                 this.props.history.push('/login')
@@ -59,11 +59,11 @@ export default class Game extends React.Component {
     }
     render() {
         return(
-            <div>
+            <div className="container">
                 <h2>Welcome {this.state.username}!</h2>
                 <form method="post" onSubmit={this.handleSubmit}>
                     {this.state.questions.map((question, index) => (<Question key={index} ask={question.ask} _id={question._id} a={question.a} b={question.b} c={question.c} d={question.d} onAnsChange={this.handleAnsChange}/>))}
-                    <input type="submit" value="Submit" />
+                    <input type="submit" className="btn btn-success" value="Submit" />
                 </form>
             </div>
         )
