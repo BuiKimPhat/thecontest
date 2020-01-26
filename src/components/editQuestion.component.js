@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 export default class editQuiz extends React.Component {
+    _isMounted = false;
     constructor(props){
         super(props);
         this.state = {
@@ -21,13 +22,27 @@ export default class editQuiz extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
     componentDidMount(){
-        axios.post('http://localhost:6969/questions', {id :this.state.id})
-            .then(res => {
-                this.setState({
-                    quizList: res.data
+        this._isMounted = true;
+        if (!this.state.id) {
+            alert("You need to log in as admin to access this page");
+            this.props.history.push({ pathname: "/login" })
+        }
+        if (this._isMounted) {
+            if (this.state.id) {
+                axios.post('http://localhost:6969/questions', {id :this.state.id})
+                .then(res => {
+                    if (this._isMounted) {
+                        this.setState({
+                            quizList: res.data
+                        })    
+                    }
                 })
-            })
-            .catch(err => console.log(err));  
+                .catch(err => console.log(err));      
+            }
+        }
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
     }
     handleChange(e){
         var name = e.target.name;
@@ -109,10 +124,13 @@ export default class editQuiz extends React.Component {
     }
     render(){
         return(
-            <div className="container-fluid ">
-                <button type="button" className="btn btn-success" data-toggle="modal" data-target="#addQues" onClick={(e) => this.handleClick(0, e)}>
-                    Add a question
-                </button>
+            <div className="container-fluid">
+                <div className="container">
+                    <button type="button" className="btn btn-success" data-toggle="modal" data-target="#addQues" onClick={(e) => this.handleClick(0, e)}>
+                        Add a question
+                    </button>
+                </div>
+                <br/>
                 <form method="post" onSubmit={this.handleSubmit}>
                 <div className="modal" id="addQues">
                     <div className="modal-dialog">
@@ -122,29 +140,29 @@ export default class editQuiz extends React.Component {
                         <button type="button" className="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div className="modal-body">
-                            <div className="container-fluid">
-                                <label htmlFor="askForm">Questions:</label>
-                                <input type="text" name="ask" id="askForm" value={this.state.ask} onChange={this.handleChange} />
+                            <div className="container-fluid form-group">
+                                <label htmlFor="askForm">Question:</label>
+                                <input type="text" name="ask" id="askForm" placeholder="Question" className="form-control" value={this.state.ask} onChange={this.handleChange} />
                             </div>
-                            <div className="container-fluid">
+                            <div className="container-fluid form-group">
                                 <label htmlFor="AForm">A:</label>
-                                <input type="text" name="a" id="AForm" value={this.state.a} onChange={this.handleChange} />
+                                <input type="text" name="a" id="AForm" placeholder="Option A" className="form-control" value={this.state.a} onChange={this.handleChange} />
                             </div>
-                            <div className="container-fluid">
+                            <div className="container-fluid form-group">
                                 <label htmlFor="BForm">B:</label>
-                                <input type="text" name="b" id="BForm" value={this.state.b} onChange={this.handleChange} />
+                                <input type="text" name="b" id="BForm" placeholder="Option B" className="form-control" value={this.state.b} onChange={this.handleChange} />
                             </div>
-                            <div className="container-fluid">
+                            <div className="container-fluid form-group">
                                 <label htmlFor="CForm">C:</label>
-                                <input type="text" name="c" id="CForm" value={this.state.c} onChange={this.handleChange} />
+                                <input type="text" name="c" id="CForm" placeholder="Option C" className="form-control" value={this.state.c} onChange={this.handleChange} />
                             </div>
-                            <div className="container-fluid">
+                            <div className="container-fluid form-group">
                                 <label htmlFor="DForm">D:</label>
-                                <input type="text" name="d" id="DForm" value={this.state.d} onChange={this.handleChange} />
+                                <input type="text" name="d" id="DForm" placeholder="Option D" className="form-control" value={this.state.d} onChange={this.handleChange} />
                             </div>
-                            <div className="container-fluid">
+                            <div className="container-fluid form-group">
                                 <label htmlFor="ansForm">Answer:</label>
-                                <select id="ansForm" name="ans" value={this.state.ans} onChange={this.handleChange}> 
+                                <select id="ansForm" className="form-control" name="ans" value={this.state.ans} onChange={this.handleChange}> 
                                     <option value="a">A</option>
                                     <option value="b">B</option>
                                     <option value="c">C</option>

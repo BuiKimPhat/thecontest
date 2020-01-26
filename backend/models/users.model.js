@@ -7,6 +7,7 @@ const userSchema = new Schema({
     password: { type: String, required: true },
     isAdmin: { type: Boolean },
     time: {type: Number},
+    score: {type: Number},
     play: [
         {
             askID: {type: String},

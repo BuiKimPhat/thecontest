@@ -19,13 +19,18 @@ export default class Game extends React.Component {
             alert("Bạn cần phải đăng nhập để tiếp tục!");
             this.props.history.push('/login');
         }
-        axios.get('http://localhost:6969/questions')
-        .then(res => {
-            this.setState({
-                questions: res.data
+        axios.post('http://localhost:6969/questions', {id: this.state.id})
+            .then(res => {
+                if (res.data === 'You cannot change your answer after submission!') {
+                    alert(res.data);
+                    this.props.history.push('/login');
+                } else {
+                    this.setState({
+                        questions: res.data
+                    })    
+                }
             })
-        })
-        .catch(err => console.log(err));
+            .catch(err => console.log(err));
     }
     handleAnsChange(eachAns){
         if (eachAns && this.state){
@@ -60,7 +65,7 @@ export default class Game extends React.Component {
     render() {
         return(
             <div className="container">
-                <h2>Welcome {this.state.username}!</h2>
+                <h2>Welcome {this.state.username}!</h2><hr/>
                 <form method="post" onSubmit={this.handleSubmit}>
                     {this.state.questions.map((question, index) => (<Question key={index} ask={question.ask} _id={question._id} a={question.a} b={question.b} c={question.c} d={question.d} onAnsChange={this.handleAnsChange}/>))}
                     <input type="submit" className="btn btn-success" value="Submit" />

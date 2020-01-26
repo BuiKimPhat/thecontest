@@ -69,13 +69,13 @@ export default class Login extends React.Component {
 
                                     
                                     <div className="wrap-input100 validate-input m-b-16" data-validate = "Username is required">
-                                        <input className="input100"  type='text' name='username' onChange={this.handleChange} placeholder="Username" />
+                                        <input className="input100"  type='text' name='username' onChange={this.handleChange} placeholder="Username" autoFocus required/>
                                         <span className="focus-input100"></span>
                                     </div>
                                     
                                     
                                     <div className="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-                                        <input className="input100" type='password' name='password' onChange={this.handleChange} placeholder="Password" />
+                                        <input className="input100" type='password' name='password' onChange={this.handleChange} placeholder="Password" required/>
                                         <span className="focus-input100"></span>
                                     </div>
 
