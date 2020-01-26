@@ -19,7 +19,7 @@ export default class Admin extends React.Component {
             <div className="container">
                 <div className="alert alert-warning alert-dismissible">
                     <button type="button" className="close" data-dismiss="alert">&times;</button>
-                    <strong>Lưu ý!</strong>  Đây là trang admin. Vì lí do bảo mật, <b>hạn chế Reload</b> trang admin hoặc sử dụng nút <b>Forward, Back</b> trên trang này. Khi đó sẽ phải đăng nhập lại để sử dụng tính năng admin.
+                    <strong>Lưu ý!</strong>  Đây là trang admin. Vì lí do bảo mật, <b>hạn chế</b> sử dụng nút <b>Refresh, Forward, Back</b> trên trình duyệt. Khi đó sẽ phải đăng nhập lại để sử dụng tính năng admin. Nếu muốn reload, hãy <b>dùng nút Reload</b> có sẵn.
                 </div>
                 <h2>Welcome {this.state.username}!</h2><br />
                 <button className="btn btn-warning" value="Users" onClick={this.handleClick}>Users</button>
