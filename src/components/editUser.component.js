@@ -154,7 +154,7 @@ export default class editUser extends React.Component {
                     <button type="button" className="btn btn-success" data-toggle="modal" data-target="#addUser" onClick={(e) => this.handleClick(0, e)}>
                         Add a user
                     </button>
-                    <button type="button" className="btn btn-success float-right" onClick={this.handleReload}>
+                    <button type="button" className="btn btn-primary float-right" onClick={this.handleReload}>
                         Reload
                     </button>
                 </div>
