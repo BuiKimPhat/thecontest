@@ -20,6 +20,7 @@ export default class editQuiz extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleReload = this.handleReload.bind(this);
     }
     componentDidMount(){
         this._isMounted = true;
@@ -122,12 +123,30 @@ export default class editQuiz extends React.Component {
             })
         }
     }
+    handleReload(){
+        if (this._isMounted) {
+            if (this.state.id) {
+                axios.post('http://localhost:6969/questions', {id :this.state.id})
+                .then(res => {
+                    if (this._isMounted) {
+                        this.setState({
+                            quizList: res.data
+                        })    
+                    }
+                })
+                .catch(err => console.log(err));      
+            }
+        }
+    }
     render(){
         return(
             <div className="container-fluid">
                 <div className="container">
                     <button type="button" className="btn btn-success" data-toggle="modal" data-target="#addQues" onClick={(e) => this.handleClick(0, e)}>
                         Add a question
+                    </button>
+                    <button type="button" className="btn btn-primary float-right" onClick={this.handleReload}>
+                        Reload
                     </button>
                 </div>
                 <br/>

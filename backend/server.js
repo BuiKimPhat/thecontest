@@ -44,8 +44,9 @@ app.post('/login', (req,res) => {
 
 app.post('/submit', (req,res) => {
     var thisAns = req.body.play;
+    var thisID = req.body.id;
     var thisScore = 0;
-    User.findByIdAndUpdate(req.body.id,{play: thisAns})
+    User.findByIdAndUpdate(thisID,{play: thisAns})
         .then(user => {
             if (user) {
                 Question.find()
@@ -54,7 +55,12 @@ app.post('/submit', (req,res) => {
                             for (var i=0;i<thisAns.length;i++) {
                                 if (questions.find(quest => quest._id == thisAns[i].askID).ans == thisAns[i].ans) thisScore++;
                             }
-                            res.json('Answer submitted!\nYour Score is: ' + thisScore + ' / ' + questions.length);  
+                            User.findByIdAndUpdate(thisID,{score: thisScore})
+                                .then(thisUser => {
+                                    if (thisUser) res.json('Answer submitted!\nYour Score is: ' + thisScore + ' / ' + questions.length);
+                                    else res.json('User not found!');
+                                })
+                                .catch(err => res.status(400).json('Error: ' + err));                    
                         }
                         else res.json('Questions not found!');
                     })
@@ -62,7 +68,7 @@ app.post('/submit', (req,res) => {
             }
             else res.json('User not found!');
         })
-        .catch(err => res.status(400).json('Error: ' + err));
+        .catch(err => res.status(400).json('Error: ' + err));    
 })
 
 //Run

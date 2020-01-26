@@ -20,6 +20,7 @@ export default class editUser extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleAnsChange = this.handleAnsChange.bind(this);
+        this.handleReload = this.handleReload.bind(this);
     }
     componentDidMount(){
         this._isMounted = true; 
@@ -131,12 +132,30 @@ export default class editUser extends React.Component {
             })
         }
     }
+    handleReload(){
+        if (this._isMounted){
+            if (this.state.id) {
+                axios.post('http://localhost:6969/users', {id: this.state.id})
+                .then(res => {
+                    if (this._isMounted) {
+                        this.setState({
+                            userList: res.data
+                        })    
+                    }
+                })
+                .catch(err => console.log(err));          
+            }
+        }
+    }
     render(){
         return(
             <div className="container-fluid">
                 <div className="container">
                     <button type="button" className="btn btn-success" data-toggle="modal" data-target="#addUser" onClick={(e) => this.handleClick(0, e)}>
                         Add a user
+                    </button>
+                    <button type="button" className="btn btn-success float-right" onClick={this.handleReload}>
+                        Reload
                     </button>
                 </div>
                 <br/>
