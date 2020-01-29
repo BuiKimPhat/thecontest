@@ -12,7 +12,9 @@ export default class Admin extends React.Component {
     handleClick(e){
         var value = e.target.value;
         if (value === "Users") this.props.history.push({pathname: '/admin/users', id: this.state.id});
-        else this.props.history.push({pathname: '/admin/questions', id: this.state.id});
+        else if (value === "Games") this.props.history.push({pathname: '/admin/games', id: this.state.id});
+        else if (value === "Quiz") this.props.history.push({pathname: '/admin/questions', id: this.state.id});
+        else this.props.history.push({pathname: '/admin/live', id: this.state.id})
     }
     render(){
         return(
@@ -22,8 +24,10 @@ export default class Admin extends React.Component {
                     <strong>Lưu ý!</strong>  Đây là trang admin. Vì lí do bảo mật, <b>hạn chế sử dụng nút Refresh, Forward, Back</b> trên trình duyệt. Khi đó sẽ phải đăng nhập lại để sử dụng tính năng admin. Nếu muốn reload, hãy <b>dùng nút Reload</b> có sẵn.
                 </div>
                 <h2>Welcome {this.state.username}!</h2><br />
+                <button className="btn btn-warning" value="Games" onClick={this.handleClick}>Games</button>	&nbsp; &nbsp;
                 <button className="btn btn-warning" value="Users" onClick={this.handleClick}>Users</button>	&nbsp; &nbsp;
-                <button className="btn btn-warning" value="Quiz" onClick={this.handleClick}>Questions</button>
+                <button className="btn btn-warning" value="Quiz" onClick={this.handleClick}>Questions</button> &nbsp; &nbsp;
+                <button className="btn btn-warning" value="Live" onClick={this.handleClick}>Live</button>	&nbsp; &nbsp;
                 <a href="/login" className="btn btn-primary float-right">Log out</a>
                 <hr/>
             </div>

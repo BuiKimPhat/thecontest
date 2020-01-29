@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const questionSchema = new Schema({
-    ask: { type: String, require: true },
+    game: { type: String, required: true },
+    ask: { type: String, required: true },
     a: {type: String},
     b: {type: String},
     c: {type: String},

@@ -2,15 +2,6 @@ const router = require('express').Router();
 const Question = require('../models/question.model');
 const User = require('../models/users.model');
 
-// router.route('/').get((req,res) => {
-//     Question.find()
-//     .then(questions => {
-//         const userGet = questions.map(question => ({_id: question._id, ask: question.ask, a:question.a, b:question.b, c:question.c, d:question.d}))
-//         if (userGet) res.json(userGet);
-//         else res.json('Questions not found!');
-//     })
-//     .catch(err => res.status(400).json('Error: ' + err));
-// });
 router.route('/').post((req,res) => {
     User.findById(req.body.id)
     .then(user => {
@@ -23,12 +14,12 @@ router.route('/').post((req,res) => {
                     })
                     .catch(err => res.status(400).json('Error: ' + err));        
             } else {
-                if (user.play.length) {
+                if (user.play.length || user.hasDone) {
                     res.json('You cannot change your answer after submission!');
                 } else {
                         Question.find()
                             .then(questions => {
-                                const userGet = questions.map(question => ({_id: question._id, ask: question.ask, a:question.a, b:question.b, c:question.c, d:question.d}))
+                                const userGet = questions.filter(quest => quest.game == req.body.game).map(question => ({_id: question._id, ask: question.ask, a:question.a, b:question.b, c:question.c, d:question.d}))
                                 if (userGet) res.json(userGet);
                                 else res.json('Questions not found!');
                             })
@@ -44,6 +35,7 @@ router.route('/add').post((req,res) => {
     .then(admin => {
         if (admin.isAdmin) {
             let newQues = new Question({
+                game: req.body.game,
                 ask: req.body.ask,
                 a: req.body.a,
                 b: req.body.b,
@@ -64,6 +56,7 @@ router.route('/edit').post((req,res) => {
     .then(admin => {
         if (admin.isAdmin) {
             let update = {
+                game: req.body.game,
                 ask: req.body.ask,
                 a: req.body.a,
                 b: req.body.b,

@@ -7,9 +7,18 @@
         margin: 1.75rem auto;
     }
 }
+#watchGame .modal-dialog {
+    max-width: 98%;
+}
+.status {
+    height: 200px;
+}
 label {
     font-weight: bold;
 }
 .container {
     margin-bottom: 20px;
+}
+.mt {
+    margin-top: 10%
 }

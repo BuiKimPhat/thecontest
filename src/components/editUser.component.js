@@ -2,6 +2,33 @@ import React from 'react'
 import axios from 'axios'
 import Answer from './answer.component'
 
+class InputAns extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            askID: props.askID,
+            ans: props.ans
+        }
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(e){
+        var value = e.target.value;
+        this.setState({
+            ans: value
+        }, () => {
+            this.props.onAnsChange(this.state);
+        })
+    }
+    render(){
+        return(
+            <div className="container-fluid form-group">
+                <label htmlFor="ansForm">{this.state.askID} :</label>
+                <input type="text" name="ans" id="userForm" className="form-control" placeholder="Answer" value={this.state.ans} onChange={this.handleChange} />
+            </div>    
+        )
+    }
+}
+
 export default class editUser extends React.Component {
     _isMounted = false;
     constructor(props){
@@ -9,12 +36,15 @@ export default class editUser extends React.Component {
         this.state = {
             id: this.props.location.id,
             userList: [],
+            gameList: [],
             isEdit: false,
             editid: "",
             username: "",
+            game: "",
             password: "",
             isAdmin: false,
-            play: []
+            play: [],
+            hasDone: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,6 +67,15 @@ export default class editUser extends React.Component {
                             userList: res.data
                         })    
                     }
+                    axios.post('http://localhost:6969/games', {id: this.state.id})
+                    .then(res2 => {
+                        if (this._isMounted) {
+                            this.setState({
+                                gameList: res2.data
+                            })    
+                        }
+                    })
+                    .catch(err2 => console.log(err2));              
                 })
                 .catch(err => console.log(err));          
             }
@@ -46,8 +85,11 @@ export default class editUser extends React.Component {
         this._isMounted = false;
     }
     handleChange(e){
-        var name = e.target.name;
-        var value = e.target.value;
+        var target = e.target;
+        var name = target.name;
+        var value = target.type === 'checkbox' ? target.checked : target.value;
+        if (value === "true") value = true;
+        if (value === "false") value = false;
         this.setState({
             [name] : value
         })
@@ -60,6 +102,8 @@ export default class editUser extends React.Component {
             username: this.state.username,
             password: this.state.password,
             isAdmin: this.state.isAdmin,
+            hasDone: this.state.hasDone,
+            game: this.state.game,
             play: this.state.play
         }
         var uplink;
@@ -74,11 +118,11 @@ export default class editUser extends React.Component {
                         userList: res2.data
                     })
                 })
-                .catch(err => console.log(err));          
+                .catch(err2 => console.log(err2));          
             })
             .catch(err => console.log(err));
     }
-    handleClick(id,username,password,isAdmin,play, e){
+    handleClick(id,username,password,isAdmin,play,game,hasDone, e){
         if (id) {
             if (id === "del") {
                 let confirmDel = window.confirm("Are you sure want to delete this user?");
@@ -92,7 +136,7 @@ export default class editUser extends React.Component {
                                         userList: res2.data
                                     })
                                 })
-                                .catch(err => console.log(err));                      
+                                .catch(err2 => console.log(err2));                      
                         })
                         .catch(err => console.log(err));    
                 }
@@ -102,6 +146,8 @@ export default class editUser extends React.Component {
                     username: username,
                     password: password,
                     isAdmin: isAdmin,
+                    hasDone: hasDone,
+                    game: game ? game : this.state.gameList[0].title,
                     play: play,
                     isEdit: true
                 })        
@@ -111,6 +157,8 @@ export default class editUser extends React.Component {
                 editid: "",
                 username: "",
                 password: "",
+                hasDone: false,
+                game: game ? game : this.state.gameList[0].title,
                 isAdmin: false,
                 play: [],
                 isEdit: false
@@ -133,6 +181,11 @@ export default class editUser extends React.Component {
         }
     }
     handleReload(){
+        this._isMounted = true; 
+        if (!this.state.id) {
+            alert("You need to log in as admin to access this page");
+            this.props.history.push({ pathname: "/login" })
+        }
         if (this._isMounted){
             if (this.state.id) {
                 axios.post('http://localhost:6969/users', {id: this.state.id})
@@ -142,6 +195,15 @@ export default class editUser extends React.Component {
                             userList: res.data
                         })    
                     }
+                    axios.post('http://localhost:6969/games', {id: this.state.id})
+                    .then(res2 => {
+                        if (this._isMounted) {
+                            this.setState({
+                                gameList: res2.data
+                            })    
+                        }
+                    })
+                    .catch(err2 => console.log(err2));              
                 })
                 .catch(err => console.log(err));          
             }
@@ -150,6 +212,7 @@ export default class editUser extends React.Component {
     render(){
         return(
             <div className="container-fluid">
+                <h2 className="container">User</h2>
                 <div className="container">
                     <button type="button" className="btn btn-success" data-toggle="modal" data-target="#addUser" onClick={(e) => this.handleClick(0, e)}>
                         Add a user
@@ -169,21 +232,37 @@ export default class editUser extends React.Component {
                         </div>
                         <div className="modal-body">
                             <div className="container-fluid form-group">
-                                <label htmlFor="askForm">Username:</label>
-                                <input type="text" name="username" id="userForm" className="form-control" placeholder="Username" value={this.state.username} onChange={this.handleChange} />
+                                <label htmlFor="userForm">Username:</label>
+                                <input type="text" name="username" id="userForm" className="form-control" placeholder="Username (Không trùng với tên user khác)" value={this.state.username} onChange={this.handleChange} />
                             </div>
                             <div className="container-fluid form-group">
-                                <label htmlFor="AForm">Password:</label>
+                                <label htmlFor="passForm">Password:</label>
                                 <input type="text" name="password" id="passForm" className="form-control" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
                             </div>
                             <div className="container-fluid form-group">
-                                <label htmlFor="BForm">Who:</label>
-                                <select id="ansForm" className="form-control" name="isAdmin" value={this.state.isAdmin} onChange={this.handleChange}> 
+                                <label htmlFor="whoForm">Who:</label>
+                                <select id="whoForm" className="form-control" name="isAdmin" value={this.state.isAdmin} onChange={this.handleChange}> 
                                     <option value={false}>Candidate</option>
                                     <option value={true}>Admin</option>
                                 </select>
                             </div>
-                            {(!this.state.isAdmin && this.state.isEdit) ? (<div className="container-fluid form-group"><label>Answer:</label><div className="row">{this.state.play.map((item1,index) => (<Answer askID={item1.askID} ans={item1.ans} key={index} onAnsChange={this.handleAnsChange}/>))}</div></div>) : ""}
+                            {(!this.state.isAdmin && this.state.gameList.length) ? (        
+                                <div>                    
+                                    <div className="container-fluid form-group">
+                                        <label htmlFor="gameForm">Game:</label>
+                                        <select id="gameForm" className="form-control" name="game" value={this.state.game} onChange={this.handleChange}> 
+                                            {this.state.gameList.map((game, index) => (<option value={game.title} key={index}>{game.title}</option>))}
+                                        </select>
+                                    </div>
+                                    <div className="container-fluid custom-control custom-switch">
+                                        <input type="checkbox" name="hasDone" checked={this.state.hasDone} onChange={this.handleChange} className="custom-control-input" id="doneForm" />
+                                        <label className="custom-control-label" htmlFor="doneForm">Done </label>
+                                    </div>
+                                </div>
+                            ) : ""}
+                            {(!this.state.isAdmin && this.state.isEdit) ? (this.state.gameList.find(game => game.title === this.state.game).form !== "Multiple-choice" ?
+                                (<div className="container-fluid form-group"><label>Answer:</label><div className="row">{this.state.play.map((item1,index) => (<InputAns askID={item1.askID} ans={item1.ans} key={index} onAnsChange={this.handleAnsChange}/>))}</div></div>) 
+                            : (<div className="container-fluid form-group"><label>Answer:</label><div className="row">{this.state.play.map((item1,index) => (<Answer askID={item1.askID} ans={item1.ans} key={index} onAnsChange={this.handleAnsChange}/>))}</div></div>)) : ""}
                         </div>
                         <div className="modal-footer">
                         {this.state.isEdit ? (<button type="button" className="btn btn-danger" onClick={(id, e) => this.handleClick("del", e)}>Delete</button>) : ""}
@@ -200,11 +279,13 @@ export default class editUser extends React.Component {
                         <th>User</th>
                         <th>Password</th>
                         <th>Who</th>
+                        <th>Game</th>
+                        <th>Time</th>
                         <th>Score</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.userList.map((user,index) => (<tr onClick={(e) => this.handleClick(user._id, user.username,user.password, user.isAdmin, user.play, e)} data-toggle="modal" data-target="#addUser" className="adminList" key={index}><td>{user._id}</td><td>{user.username}</td><td>{user.password}</td><td>{user.isAdmin ? "Admin" : "Candidate"}</td><td>{user.score ? user.score : ""}</td></tr>))}
+                        {this.state.userList.map((user,index) => (<tr onClick={(e) => this.handleClick(user._id, user.username,user.password, user.isAdmin, user.play ? user.play : [], user.game, user.hasDone !== undefined ? user.hasDone : false,user.time, e)} data-toggle="modal" data-target="#addUser" className="adminList" key={index}><td>{user._id}</td><td>{user.username}</td><td>{user.password}</td><td>{user.isAdmin ? "Admin" : "Candidate"}</td><td>{user.game}</td><td>{user.time ? user.time : ""}</td><td>{user.score ? user.score : ""}</td></tr>))}
                     </tbody>
                 </table>
             </div>

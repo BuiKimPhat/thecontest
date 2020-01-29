@@ -8,8 +8,11 @@ export default class editQuiz extends React.Component {
         this.state = {
             id: this.props.location.id,
             quizList: [],
+            gameList: [],
             isEdit: false,
             editid: "",
+            game: "",
+            form: "",
             ask: "",
             a: "",
             b: "",
@@ -37,6 +40,15 @@ export default class editQuiz extends React.Component {
                             quizList: res.data
                         })    
                     }
+                    axios.post('http://localhost:6969/games', {id: this.state.id})
+                    .then(res2 => {
+                        if (this._isMounted) {
+                            this.setState({
+                                gameList: res2.data
+                            })    
+                        }
+                    })
+                    .catch(err2 => console.log(err2));              
                 })
                 .catch(err => console.log(err));      
             }
@@ -50,6 +62,10 @@ export default class editQuiz extends React.Component {
         var value = e.target.value;
         this.setState({
             [name] : value
+        }, () => {
+            this.setState({
+                form : this.state.gameList.find(game => this.state.game === game.title).form
+            })
         })
     }
     handleSubmit(e){
@@ -57,6 +73,7 @@ export default class editQuiz extends React.Component {
         var update = {
             id: this.state.id,
             editid: this.state.editid,
+            game: this.state.game,
             ask: this.state.ask,
             a: this.state.a,
             b: this.state.b,
@@ -76,11 +93,11 @@ export default class editQuiz extends React.Component {
                         quizList: res2.data
                     })
                 })
-                .catch(err => console.log(err));          
+                .catch(err2 => console.log(err2));          
             })
             .catch(err => console.log(err));
     }
-    handleClick(id,ask,a,b,c,d,ans, e){
+    handleClick(id,ask,a,b,c,d,ans,game,form,e){
         if (id) {
             if (id === "del") {
                 let confirmDel = window.confirm("Are you sure want to delete this question?");
@@ -106,7 +123,9 @@ export default class editQuiz extends React.Component {
                     b: b,
                     c: c,
                     d: d,
-                    ans: ans ? ans : "a",
+                    ans: ans ? ans : (this.state.form === "Multi-choice" ? "a" : ""),
+                    game: game ? game : this.state.gameList[0].title,
+                    form: form ? form : this.state.gameList[0].form,
                     isEdit: true
                 })        
             }
@@ -118,8 +137,13 @@ export default class editQuiz extends React.Component {
                 b: "",
                 c: "",
                 d: "",
-                ans: "",
+                game: game ? game : this.state.gameList[0].title,
+                form: form ? form : this.state.gameList[0].form,
                 isEdit: false
+            }, () => {
+                this.setState({
+                    ans: ans ? ans : (this.state.form === "Multi-choice" ? "a" : "")
+                })
             })
         }
     }
@@ -133,6 +157,15 @@ export default class editQuiz extends React.Component {
                             quizList: res.data
                         })    
                     }
+                    axios.post('http://localhost:6969/games', {id: this.state.id})
+                    .then(res2 => {
+                        if (this._isMounted) {
+                            this.setState({
+                                gameList: res2.data
+                            })    
+                        }
+                    })
+                    .catch(err2 => console.log(err2));              
                 })
                 .catch(err => console.log(err));      
             }
@@ -141,6 +174,7 @@ export default class editQuiz extends React.Component {
     render(){
         return(
             <div className="container-fluid">
+                <h2 className="container">Question</h2>
                 <div className="container">
                     <button type="button" className="btn btn-success" data-toggle="modal" data-target="#addQues" onClick={(e) => this.handleClick(0, e)}>
                         Add a question
@@ -159,11 +193,20 @@ export default class editQuiz extends React.Component {
                         <button type="button" className="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div className="modal-body">
+                            {(this.state.gameList.length) ? (                            
+                                <div className="container-fluid form-group">
+                                    <label htmlFor="gameForm">Game:</label>
+                                    <select id="gameForm" className="form-control" name="game" value={this.state.game} onChange={this.handleChange}> 
+                                        {this.state.gameList.map((game, index) => (<option value={game.title} key={index}>{game.title}</option>))}
+                                    </select>
+                                </div>
+                            ) : ""}
                             <div className="container-fluid form-group">
                                 <label htmlFor="askForm">Question:</label>
                                 <input type="text" name="ask" id="askForm" placeholder="Question" className="form-control" value={this.state.ask} onChange={this.handleChange} />
                             </div>
-                            <div className="container-fluid form-group">
+                            {this.state.form === "Multi-choice" ?
+                            (<div><div className="container-fluid form-group">
                                 <label htmlFor="AForm">A:</label>
                                 <input type="text" name="a" id="AForm" placeholder="Option A" className="form-control" value={this.state.a} onChange={this.handleChange} />
                             </div>
@@ -187,7 +230,11 @@ export default class editQuiz extends React.Component {
                                     <option value="c">C</option>
                                     <option value="d">D</option>
                                 </select>
-                            </div>
+                            </div></div>)
+                            :   (<div className="container-fluid form-group">
+                                    <label htmlFor="ansForm">Answer:</label>
+                                    <input type="text" name="ans" id="ansForm" placeholder="Answer" className="form-control" value={this.state.ans} onChange={this.handleChange} />
+                                </div> )}
                         </div>
                         <div className="modal-footer">
                         {this.state.isEdit ? (<button name="deleteQues" type="button" className="btn btn-danger" onClick={(id, e) => this.handleClick("del", e)}>Delete</button>) : ""}
@@ -207,10 +254,11 @@ export default class editQuiz extends React.Component {
                         <th>C</th>
                         <th>D</th>
                         <th>Answer</th>
+                        <th>Game</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.quizList.map((quest,index) => (<tr onClick={(e) => this.handleClick(quest._id, quest.ask ? quest.ask : "", quest.a ? quest.a : "", quest.b ? quest.b : "", quest.c ? quest.c : "", quest.d ? quest.d : "", quest.ans ? quest.ans : "", e)} data-toggle="modal" data-target="#addQues" className="adminList" key={index}><td>{quest._id}</td><td>{quest.ask}</td><td>{quest.a}</td><td>{quest.b}</td><td>{quest.c}</td><td>{quest.d}</td><td>{quest.ans}</td></tr>))}
+                            {this.state.quizList.map((quest,index) => (<tr onClick={(e) => this.handleClick(quest._id, quest.ask ? quest.ask : "", quest.a ? quest.a : "", quest.b ? quest.b : "", quest.c ? quest.c : "", quest.d ? quest.d : "", quest.ans ? quest.ans : "", quest.game,this.state.gameList.find(game => game.title === quest.game).form, e)} data-toggle="modal" data-target="#addQues" className="adminList" key={index}><td>{quest._id}</td><td>{quest.ask}</td><td>{quest.a}</td><td>{quest.b}</td><td>{quest.c}</td><td>{quest.d}</td><td>{quest.ans}</td><td>{quest.game}</td></tr>))}
                     </tbody>
                 </table>
             </div>

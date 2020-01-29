@@ -8,6 +8,8 @@ import Admin from './components/admin.component'
 import Login from './components/login.component'
 import editUser from './components/editUser.component';
 import editQuiz from './components/editQuestion.component';
+import editGame from './components/editGame.component';
+import Watch from './components/watch.component'
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/admin/users" component={editUser} />
         <Route path="/admin/questions" component={editQuiz} />
+        <Route path="/admin/games" component={editGame} />
+        <Route path="/admin/live" component={Watch} />
       </Router>
     );
 }
