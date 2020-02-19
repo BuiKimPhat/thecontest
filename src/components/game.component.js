@@ -155,14 +155,24 @@ export default class Game extends React.Component {
     handleAnsChange(eachAns){
         if (eachAns && this.state){
             this.setState(prevState => {
-                let now = prevState.play.filter(el => el.askID === eachAns.askID).length;
+                // let now = prevState.play.filter(el => el.askID === eachAns.askID).length;
+                // if (!now) {
+                //     return ({ 
+                //         play: [...prevState.play, eachAns] 
+                //     })
+                // }
+                // return ({ 
+                //     play: prevState.play.map(el => el.askID === eachAns.askID ? eachAns : el) 
+                // })
+                let now = prevState.play;
                 if (!now) {
                     return ({ 
-                        play: [...prevState.play, eachAns] 
+                        play: new Array(this.state.questions.length).fill("") 
                     })
                 }
+                now[this.state.i] = eachAns;
                 return ({ 
-                    play: prevState.play.map(el => el.askID === eachAns.askID ? eachAns : el) 
+                    play: now 
                 })
             })
         }
@@ -189,7 +199,8 @@ export default class Game extends React.Component {
             if (!this.state.wait) {
                 clearInterval(this.timerID);
                 this.setState({timer: this.initTime, wait: true});
-                this.socket.emit('liveSubmit', {name: this.state.username, time: user.time, ans: this.state.play[this.state.i] ? this.state.play[this.state.i].ans : ""});    
+                this.socket.emit('liveSubmit', {name: this.state.username, time: user.time, ans: this.state.play[this.state.i] ? this.state.play[this.state.i].ans : ""}); 
+                console.log({name: this.state.username, time: user.time, ans: this.state.play[this.state.i] ? this.state.play[this.state.i].ans : ""})  
             }
             if (this.state.i === (this.state.questions.length - 1)) {
                 axios.post('http://localhost:6969/submit', user)

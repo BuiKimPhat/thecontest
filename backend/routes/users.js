@@ -48,25 +48,26 @@ router.route('/edit').post((req,res) => {
                 .then(user => {
                     if (user) {
                         Question.find()
-                            .then(questions => {
-                                if (questions) {
-                                    for (var i=0;i<thisAns.length;i++) {
-                                        if (questions.find(quest => quest._id == thisAns[i].askID).ans == thisAns[i].ans) thisScore++;
-                                    }
-                                    User.findByIdAndUpdate(thisID,{score: thisScore})
-                                        .then(thisUser => {
-                                            if (thisUser) res.json(thisUser.username + " edited successfully!");
-                                            else res.json('User not found!');
-                                        })
-                                        .catch(err => res.status(400).json('Error: ' + err));                    
+                        .then(questions => {
+                            if (questions) {
+                                for (var i=0;i<thisAns.length;i++) {
+                                    if (questions.find(quest => quest._id == thisAns[i].askID) && questions.find(quest => quest._id == thisAns[i].askID).ans == thisAns[i].ans) thisScore++;
+                                    else res.json("Cannot found questions for the answers!")
                                 }
-                                else res.json('Questions not found!');
-                            })
-                            .catch(err => res.status(400).json('Error: ' + err));              
+                                User.findByIdAndUpdate(thisID,{score: thisScore})
+                                    .then(thisUser => {
+                                        if (thisUser) res.json(thisUser.username + " edited successfully!");
+                                        else res.json('User not found!');
+                                    })
+                                    .catch(err3 => res.status(400).json('Error: ' + err3));                    
+                            }
+                            else res.json('Questions not found!');
+                        })
+                        .catch(err1 => res.status(400).json('Error: ' + err1));              
                     }
                     else res.json('User not found!');
                 })
-                .catch(err => res.status(400).json('Error: ' + err));    
+                .catch(err2 => res.status(400).json('Error: ' + err2));    
                 } else res.json('You are not an admin!');
     })
     .catch(err => res.status(400).json('Error: ' + err));

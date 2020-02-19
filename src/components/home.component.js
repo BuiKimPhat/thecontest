@@ -8,14 +8,14 @@ export default class Home extends React.Component {
               <section className="hero-banner">
                 <div className="container text-center">
                   <span className="hero-banner-icon"><i className="flaticon-sing" /></span>
-                  <p>20 - 22 January, 2019, Buffelo City</p>
-                  <h1>UX CONFERENCE 2019</h1>
-                  <a className="button button-header" href="/">Buy Ticket</a>
+                  <p>HCM University</p>
+                  <h1>BELL CONTEST 2019</h1>
+                  <a className="button button-header" href="/login">Log in</a>
                 </div>
               </section>
               {/*================Hero Banner Area End =================*/}
               {/*================ Innovation section Start =================*/}
-              <section className="section-padding--small bg-gray">
+              {/* <section className="section-padding--small bg-gray">
                 <div className="container">
                   <div className="row">
                     <div className="col-lg-6 align-self-center mb-5 mb-lg-0">
@@ -50,7 +50,7 @@ export default class Home extends React.Component {
               </section>
               {/*================ Innovation section End =================*/}
               {/*================ Join section Start =================*/}
-              <section className="section-margin">
+              {/* <section className="section-margin">
                 <div className="container">
                   <div className="section-intro text-center pb-98px">
                     <p className="section-intro__title">Join the event</p>
@@ -87,10 +87,10 @@ export default class Home extends React.Component {
                     </div>
                   </div>
                 </div>
-              </section>
+              </section> */}
               {/*================ Join section End =================*/}
               {/*================ Speaker section Start =================*/}
-              <section className="speaker-bg section-padding">
+              {/* <section className="speaker-bg section-padding">
                 <div className="container">
                   <div className="section-intro section-intro-white text-center pb-98px">
                     <p className="section-intro__title">Join the event</p>
@@ -206,7 +206,7 @@ export default class Home extends React.Component {
               </section>
               {/*================ Speaker section End =================*/}
               {/*================ Schedule section Start =================*/}
-              <section className="section-margin mb-5 pb-5">
+              {/* <section className="section-margin mb-5 pb-5">
                 <div className="container">
                   <div className="section-intro text-center pb-98px">
                     <p className="section-intro__title">Join the event</p>
@@ -241,9 +241,9 @@ export default class Home extends React.Component {
                               <p>23 jan, 2019</p>
                             </a>
                           </li>
-                        </ul>
+                        </ul> */}
                         {/* Tab panes */}
-                        <div className="tab-content">
+                        {/* <div className="tab-content">
                           <div id="day1" className="tab-pane">
                             <div className="schedule-card">
                               <div className="row no-gutters">
@@ -498,9 +498,9 @@ export default class Home extends React.Component {
                   </div>
                 </div>
               </section>
-              {/*================ Schedule section End =================*/}
+              ================ Schedule section End ================= */}
               {/*================ PriceTable section Start =================*/}
-              <section className="section-padding bg-gray">
+              {/* <section className="section-padding bg-gray">
                 <div className="container">
                   <div className="section-intro text-center pb-98px">
                     <p className="section-intro__title">Join the event</p>
@@ -597,7 +597,7 @@ export default class Home extends React.Component {
                     </div>
                   </div>
                 </div>
-              </section>
+              </section> */}
               {/*================ PriceTable section End =================*/}
               {/*================ Sponsor section Start =================*/}
               <section className="section-padding--small sponsor-bg">
@@ -745,10 +745,10 @@ export default class Home extends React.Component {
                     </div>
                   </div>
                 </div>
-              </section>
+              </section> */}
               {/*================ Gallery section End =================*/}
               {/*================ Blog section Start =================*/}
-              <section className="section-margin">
+              {/* <section className="section-margin">
                 <div className="container">
                   <div className="section-intro text-center pb-98px">
                     <p className="section-intro__title">Join the event</p>
@@ -810,7 +810,7 @@ export default class Home extends React.Component {
                     </div>
                   </div>
                 </div>
-              </section>
+              </section> */}
               {/*================ Blog section End =================*/}
               {/* ================ start footer Area ================= */}
               <footer className="footer-area">

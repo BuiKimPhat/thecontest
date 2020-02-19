@@ -1,6 +1,12 @@
 const router = require('express').Router();
 const Game = require('../models/game.model');
 const User = require('../models/users.model');
+const cloudinary = require('cloudinary').v2;
+cloudinary.config({ 
+    cloud_name: 'leonardothesecond', 
+    api_key: '528537812156453', 
+    api_secret: 'zfukTWqGAElCqrbyXfWTPx7G1Hs' 
+  });
 
 router.route('/').post((req,res) => {
     User.findById(req.body.id)
@@ -28,14 +34,23 @@ router.route('/').post((req,res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 router.route('/add').post((req,res) => {
+    console.log(req.files);
     User.findById(req.body.id)
     .then(admin => {
-        if (admin.isAdmin) {
-            var newGame = new Game(req.body);
-            newGame.save((err, newg) => {
-                if (err) res.status(400).json('Error: ' + err);
-                else res.json(newg.title + " added successfully!");
-            });        
+        if (admin.isAdmin) {            
+            var temp = req.body;
+            var file = req.files.gameImage;
+                cloudinary.uploader.upload(file.tempFilePath, (err , result) => {
+                    if (err) res.status(400).json(err);
+                    temp.image = result.secure_url;
+                    console.log(temp)
+                }).then(() => {
+                    var newGame = new Game(temp);
+                    newGame.save((err, newg) => {
+                        if (err) res.status(400).json('Error: ' + err);
+                        else res.json({mess: newg.title + " added successfully!", image: newg.image});
+                    });                
+                })          
         } else res.json('You are not an admin!');
     })
     .catch(err => res.status(400).json('Error: ' + err));
@@ -44,18 +59,32 @@ router.route('/edit').post((req,res) => {
     User.findById(req.body.id)
     .then(admin => {
         if (admin.isAdmin) {
-            let update = {
+            var update = {
                 title: req.body.title,
                 timer: req.body.timer,
                 form: req.body.form,
                 active: req.body.active
-            }    
-            Game.findByIdAndUpdate(req.body.editid, update)
-                .then(game => {
-                    if (game) res.json(game.title + " edited successfully!");
-                    else res.json('Game not found!');
+            }
+            var file = req.files.gameImage;
+                cloudinary.uploader.upload(file.tempFilePath, (err , result) => {
+                    if (err) res.status(400).json(err);
+                    update.image = result.secure_url;
+                }).then(() => {
+                    Game.findByIdAndUpdate(req.body.editid, update)
+                    .then(game => {
+                        if (game) res.json({mess: game.title + " edited successfully!", image: update.image});
+                        else res.json('Game not found!');
+                    })
+                    .catch(err1 => res.status(400).json('Error: ' + err1));            
                 })
-                .catch(err => res.status(400).json('Error: ' + err));        
+                // .then(result => {
+                //     update.image = result.secure_url;
+                //     console.log("upp")
+                // })
+                // .catch(err2 => {
+                //     res.status(400).json(err2);
+                //     console.log("noo")
+                // })            
         } else res.json('You are not an admin!');
     })
     .catch(err => res.status(400).json('Error: ' + err));

@@ -13,6 +13,8 @@ export default class editGame extends React.Component {
             title: "",
             timer: 0,
             form: "",
+            image: "",
+            uploading: "",
             active: false
         }
         this.handleChange = this.handleChange.bind(this);
@@ -39,6 +41,19 @@ export default class editGame extends React.Component {
                 .catch(err => console.log(err));      
             }
         }
+        // const script = document.createElement("script");
+        // script.src = "https://widget.cloudinary.com/v2.0/global/all.js";
+        // script.async = true;
+        // document.body.appendChild(script);
+
+        // this.myWidget = window.cloudinary.createUploadWidget({
+        //     cloudName: 'leonardothesecond', 
+        //     uploadPreset: 'contest'}, (error, result) => { 
+        //       if (!error && result && result.event === "success") { 
+        //         console.log('Done! Here is the image info: ', result.info); 
+        //       }
+        //     }
+        //   )
     }
     componentWillUnmount() {
         this._isMounted = false;
@@ -49,35 +64,65 @@ export default class editGame extends React.Component {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         this.setState({
             [name] : value
-        })
+        })    
     }
     handleSubmit(e){
         e.preventDefault();
-        var update = {
-            id: this.state.id,
-            editid: this.state.editid,
-            title: this.state.title,
-            timer: Number(this.state.timer),
-            form: this.state.form,
-            active: this.state.active
-        }
+        this.setState({uploading: "Uploading..."});
+        //upload image
+        // const formData = new FormData();
+        // const imagefile = document.querySelector('#file');
+        // formData.append("gameImage", imagefile.files[0]);
+        // axios.post('http://localhost:6969/upload', formData, {
+        //     headers: {
+        //     'Content-Type': 'multipart/form-data'
+        //     }
+        // })
+        //     .then(res => {
+        //         axios.post('http://localhost:6969/games', {id :this.state.id})
+        //         .then(res2 => {
+        //             this.setState({
+        //                 gameList: res2.data,
+        //                 image: res.data.image
+        //             })
+        //         })
+        //         .catch(err2 => console.log(err2));
+        //     })
+        //     .catch(err => console.log(err))
+        const formData = new FormData();
+        const imagefile = document.querySelector('#file');
+        formData.append("gameImage", imagefile.files[0]);
+        formData.append("id", this.state.id);
+        formData.append("editid", this.state.editid);
+        formData.append("title", this.state.title);
+        formData.append("timer", Number(this.state.timer));
+        formData.append("form", this.state.form);
+        formData.append("active", this.state.active);
         var uplink;
         if (this.state.isEdit === true) uplink = "http://localhost:6969/games/edit";
         else uplink = "http://localhost:6969/games/add";
-        axios.post(uplink, update)
+        axios.post(uplink, formData, {
+            headers: {
+            'Content-Type': 'multipart/form-data'
+            }
+        })
             .then(res => {
-                alert(res.data);
+                console.log(res);
+                alert(res.data.mess ? res.data.mess : res.data);
                 axios.post('http://localhost:6969/games', {id :this.state.id})
                 .then(res2 => {
+                    console.log(res2);
                     this.setState({
-                        gameList: res2.data
+                        gameList: res2.data,
+                        image: res.data.image,
+                        uploading: "Done!"
                     })
                 })
-                .catch(err => console.log(err));          
+                .catch(err2 => console.log(err2));          
             })
             .catch(err => console.log(err));
     }
-    handleClick(id,title,form,timer,active,e){
+    handleClick(id,title,form,timer,active,image, e){
         if (id) {
             if (id === "del") {
                 let confirmDel = window.confirm("Are you sure want to delete this game?");
@@ -102,8 +147,10 @@ export default class editGame extends React.Component {
                     timer: timer,
                     form: form ? form : "Multi-choice",
                     active: active,
-                    isEdit: true
-                })        
+                    isEdit: true,
+                    image: image,
+                    uploading: ""
+                });        
             }
         } else {
             this.setState({
@@ -112,8 +159,10 @@ export default class editGame extends React.Component {
                 form: form ? form : "Multi-choice",
                 timer: 0,
                 active: false,
-                isEdit: false
-            })
+                isEdit: false,
+                image: "",
+                uploading: ""
+            });
         }
     }
     handleReload(){
@@ -168,10 +217,24 @@ export default class editGame extends React.Component {
                                 <label htmlFor="timerForm">Timer <i> (leave it 0 if not use timer) </i>:</label>
                                 <input type="number" min="0" name="timer" id="timerForm" className="form-control" value={this.state.timer} onChange={this.handleChange} />
                             </div>
+                            {this.state.form === "Input-text" ? (
+                                <div className="container-fluid form-group">
+                                    {/* <button type="button" id="upload_widget" className="cloudinary-button" onClick={(e) => this.handleClick("upload")}>Upload files</button>                                 */}
+                                    <input name="image" type="file" style={{display: "none"}}
+                                        className="file-upload" data-cloudinary-field="image_id" id="file"
+                                        data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':3000,'height':2000}}" onChange={this.handleChange}/>
+                                        <label className="btn btn-primary" htmlFor="file">Upload image</label>
+                                <label htmlFor="imgUrl">Image Url:</label>
+                                <input type="text" name="" id="imgUrl" placeholder="No image" className="form-control" value={this.state.image ? this.state.image : "No image"} disabled/>
+                                </div>
+                            ) : ""}
                             <div className="container-fluid custom-control custom-switch">
                                 <input type="checkbox" name="active" checked={this.state.active} onChange={this.handleChange} className="custom-control-input" id="activeForm" />
                                 <label className="custom-control-label" htmlFor="activeForm">Active </label>
                             </div>
+                            {this.state.uploading ? (<div className="alert alert-primary" role="alert">
+                            {this.state.uploading === "Uploading..." ? (<>{this.state.uploading}<img src="/img/loading.gif" alt="loading gif" width="35" height="35"/></>) : this.state.uploading}
+                            </div>) : ""}
                         </div>
                         <div className="modal-footer">
                         {this.state.isEdit ? (<button name="deleteQues" type="button" className="btn btn-danger" onClick={(id, e) => this.handleClick("del", e)}>Delete</button>) : ""}
@@ -192,7 +255,7 @@ export default class editGame extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.gameList.map((game,index) => (<tr onClick={(e) => this.handleClick(game._id, game.title, game.form, game.timer, game.active, e)} data-toggle="modal" data-target="#addGame" className="adminList" key={index}><td>{game._id}</td><td>{game.title}</td><td>{game.form}</td><td>{game.timer}</td><td>{game.active ? "Active" : "Not active"}</td></tr>))}
+                        {this.state.gameList.map((game,index) => (<tr onClick={(e) => this.handleClick(game._id, game.title, game.form, game.timer, game.active,game.image, e)} data-toggle="modal" data-target="#addGame" className="adminList" key={index}><td>{game._id}</td><td>{game.title}</td><td>{game.form}</td><td>{game.timer}</td><td>{game.active ? "Active" : "Not active"}</td></tr>))}
                     </tbody>
                 </table>
             </div>

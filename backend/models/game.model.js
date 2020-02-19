@@ -6,6 +6,7 @@ const gameSchema = new Schema({
     timer: { type: Number },
     form: { type: String, required: true },
     i: {type: Number},
+    image: {type: String},
     active: { type: Boolean }
 }, {
     timestamps: true

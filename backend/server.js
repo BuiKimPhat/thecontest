@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const app = express();
 const http = require('http').createServer(app);
+const fileupload = require('express-fileupload');
 const io = require('socket.io')(http);
 // .env
 const PORT = 6969;
@@ -12,6 +13,9 @@ const uri = process.env.ATLAS_URL;
 // middlewares
 app.use(cors());
 app.use(express.json());
+app.use(fileupload({
+    useTempFiles: true
+}))
 
 // Real-time
 const liveServer = io.of('/liveserver');
@@ -109,17 +113,33 @@ app.post('/submit', (req,res) => {
         .catch(err => res.status(400).json('Error: ' + err));    
 })
 
-app.post('/check', (req,res) => {
-    User.findById(req.body.id)
-        .then(() => {
-            Game.findOne({title: req.body.game})
-                .then(game => {
+// app.post('/check', (req,res) => {
+//     User.findById(req.body.id)
+//         .then(() => {
+//             Game.findOne({title: req.body.game})
+//                 .then(game => {
 
-                })
-                .catch(err2 => res.status(400).json('Error: ' + err2))
-        })
-        .catch(err => res.status(400).json('Error: '+ err))
-})
+//                 })
+//                 .catch(err2 => res.status(400).json('Error: ' + err2))
+//         })
+//         .catch(err => res.status(400).json('Error: '+ err))
+// })
+
+// app.post('/upload', (req,res) => {
+    // const file = req.files.gameImage;
+    // cloudinary.uploader.upload(file.tempFilePath)
+    //     .then(result => {
+    //         Game.findOneAndUpdate({title: req.body.title}, {image: result.secure_url})
+    //             .then(game => {
+    //                 if (game) res.status(200).json({image: result.secure_url});
+    //                 else res.status(404).json('Game not found!');
+    //             })
+    //             .catch(err2 => res.status(400).json('Error: ' + err2));
+    //     })
+    //     .catch(err =>
+    //         res.status(400).json(err)
+    //     )
+// })
 
 //Run
 http.listen(PORT, () => {
